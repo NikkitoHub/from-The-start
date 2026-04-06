@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momozi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        label {
+            display: block;
+            color: #555;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #764ba2;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .video-container {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        .error {
+            color: #e74c3c;
+            margin-top: 10px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .success {
+            color: #27ae60;
+            margin-top: 10px;
+            display: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ Momozi ✨</h1>
+        
+        <label for="senha">Como eu gosto de te chamar?</label>
+        <input type="password" id="senha" placeholder="Digite aqui...">
+        
+        <button onclick="verificarSenha()">Enviar</button>
+        
+        <p class="error" id="erro">Hmm, errado! Tente novamente 😅</p>
+        <p class="success" id="sucesso">Correto! 🎉</p>
+
+        <div class="video-container" id="videoContainer">
+            <iframe src="https://www.youtube.com/embed/-gPn5GIMuX8" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        const senhaCorreta = "Momozi";
+
+        function verificarSenha() {
+            const senhaDigitada = document.getElementById("senha").value;
+            const erroMsg = document.getElementById("erro");
+            const sucessoMsg = document.getElementById("sucesso");
+            const videoContainer = document.getElementById("videoContainer");
+
+            erroMsg.style.display = "none";
+            sucessoMsg.style.display = "none";
+
+            if (senhaDigitada === senhaCorreta) {
+                sucessoMsg.style.display = "block";
+                videoContainer.style.display = "block";
+                document.getElementById("senha").disabled = true;
+            } else {
+                erroMsg.style.display = "block";
+                document.getElementById("senha").value = "";
+            }
+        }
+
+        document.getElementById("senha").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                verificarSenha();
+            }
+        });
+    </script>
+</body>
+</html>
